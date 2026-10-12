@@ -57,6 +57,7 @@ flutter:
   # the material Icons class.
   uses-material-design: true
 
+
   assets:
   - img/assets/cherry.png
   - img/assets/lemon.png
