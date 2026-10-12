@@ -15,6 +15,16 @@ class SlotMachine extends StatefulWidget {
 
 class _SlotMachineState
     extends State<SlotMachine> {
+
+  void _reset(){
+    setState(() {
+      _coins = 10;
+      _slot1 = 'img/assets/cherry.png';
+      _slot2 = 'img/assets/lemon.png';
+      _slot3 = 'img/assets/seven.png';
+      _message = '';
+    });
+  }
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -52,7 +62,7 @@ class _SlotMachineState
         ),
         SizedBox(height: 40),
 
-        ElevatedButton(onPressed: _spin, 
+        ElevatedButton(onPressed: _coins > 0?_spin : null, 
         style: ElevatedButton.styleFrom(
           backgroundColor: Colors.amber,   
            padding: EdgeInsets.symmetric(
@@ -67,8 +77,16 @@ class _SlotMachineState
         ),
         ),
           ),
+          ElevatedButton(onPressed: _reset, child: Text(
+            'начать заново',
+            style: TextStyle(
+              color: Colors.white70,
+              fontSize: 16,
+            ),
+          ))
       ],
     );
+    
   }
 
   final _random = Random();
@@ -86,6 +104,13 @@ class _SlotMachineState
   var _message = '';
 
   void _spin() {
+    if (_coins <= 0){
+      setState(()
+      {_message = 'no coins';
+      });
+      return;
+    }
+
     setState(() {
       _slot1 = _symbols[_random.nextInt(_symbols.length)];
       _slot2 = _symbols[_random.nextInt(_symbols.length)];
