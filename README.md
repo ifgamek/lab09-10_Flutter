@@ -1,17 +1,19 @@
-# lab_09
+###### Лабораторная работа номер 9
 
-A new Flutter project.
+###### Ульянов Владислав ИПС-243 13.10
 
-## Getting Started
+##### Что изучили:
 
-This project is a starting point for a Flutter application.
+- Использование и создание кнопок и задние им параметров
+- AnimatedSwitcher
+- Duration
 
-A few resources to get you started if this is your first Flutter project:
+#### Скриншот готового приложения
 
-- [Learn Flutter](https://docs.flutter.dev/get-started/learn-flutter)
-- [Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Flutter learning resources](https://docs.flutter.dev/reference/learning-resources)
+![alt text](image.png)
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+### Запуск
+
+- Скачать папку с приложением
+- Запустить через vs/code
+- Прописать в команде flutter run и выбрать ваш браузер
