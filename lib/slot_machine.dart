@@ -2,6 +2,7 @@
 import 'dart:math';
 import 'package:lab_09/slot_row.dart';
 import 'package:flutter/material.dart';
+import 'sounds_service.dart';
 
 class SlotMachine extends StatefulWidget {
   const SlotMachine({super.key});
@@ -16,12 +17,20 @@ class SlotMachine extends StatefulWidget {
 class _SlotMachineState
     extends State<SlotMachine> {
 
+      @override
+      void initState(){
+        super.initState();
+        SoundsService.playBackgtound();
+      }
+
   var _coins = 10;
   var _slot1 = 'img/assets/cherry.png';
   var _slot2 = 'img/assets/lemon.png';
   var _slot3 = 'img/assets/seven.png';
   var _message = '';
   var _isSpinning = false;
+  var _isMuted = false;
+  var _backgrounStarted = false;
 
   void _reset(){
     setState(() {
@@ -32,14 +41,34 @@ class _SlotMachineState
       _message = '';
       _isSpinning = false;
     });
+
   }
 
+void _toggleMute(){
+  SoundsService.toggleMute();
+  setState(() {
+    _isMuted = SoundsService.isMuted;
+  });
+}
 
   @override
   Widget build(BuildContext context) {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
+        Align(
+          alignment: Alignment.topRight,
+          child: Padding(
+            padding: EdgeInsets.only(right: 16,top: 8 ),
+            child: IconButton(onPressed: _toggleMute, icon: Icon(_isMuted
+            ?Icons.volume_off
+            : Icons.volume_up,
+            color: Colors.white,
+            size: 28,
+            ),
+            ),
+          ),
+        ),
         Text(
           'coins: $_coins',
           style: TextStyle(
@@ -138,12 +167,16 @@ onTick(result);
     return result;
   }
 
-  void _spin() async {
-    if (_coins <= 0 || _isSpinning) return;{
+  Future<void> _spin() async {
+    if (_coins <= 0 || _isSpinning) return;
+      SoundsService.playClick();
       setState(()
       {
         _message = '';
       });
+    if (!_backgrounStarted){
+      SoundsService.playBackgtound();
+      _backgrounStarted = true;
     }
     final result1 = await _spinReel(
       totalTicks: 10,
@@ -155,22 +188,26 @@ onTick(result);
     final result3 = await _spinReel(totalTicks: 16, onTick: (val) => setState(() => _slot3 = val),);
 
     await Future.delayed(Duration(milliseconds: 300));
+
     setState(() {
       _isSpinning = false;
       if (result1 == result2 && result2 == result3){
         if (result1 == 'img/assets/seven.png'){
           _coins += 10;
-          _message = 'джекпот! _10 coins';
+          _message = 'джекпот! +10 coins';
+          SoundsService.playJackpot();
           }
           else {
             _coins += 3;
             _message = 'win! +3 coins';
+            SoundsService.playWin();
           }
           
       }
       else{
         _coins -= 1;
         _message = 'попробуй еще раз -1 coins';
+        SoundsService.playLose();
       }
 
     });
