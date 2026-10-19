@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:lab_09/slot_machine.dart';
+import 'slot_machine.dart';
+import 'sounds_service.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await SoundsService.init();
+
   runApp(
     MaterialApp(
       debugShowCheckedModeBanner: false,
@@ -11,4 +15,5 @@ void main() {
       ),
     ),
   );
+
 }
