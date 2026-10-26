@@ -8,14 +8,14 @@
 ![alt text](steps/main.png)!
 
 Победа
-[alt text](steps/win.png)|!
+![alt text](steps/win.png)!
 
 Проигрыш
-[alt text](steps/win.png)|
+![alt text](steps/win.png)!
 
 ### Установка
 Скачайте готовый APK файл:
-[text](build/app/outputs/flutter-apk/app-release.apk)
+[app-release.apk](build/app/outputs/flutter-apk/app-release.apk)
 
 ### Платформы и их версии
 - Flutter 3.47.8
