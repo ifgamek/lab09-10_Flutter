@@ -81,14 +81,12 @@ class _SlotMachineState
   Future<void> _spin() async {
     if (_coins <= 0 || _isSpinning) return;
 
-    // 1. СНАЧАЛА блокируем кнопку и обновляем UI
     setState(() {
       _isSpinning = true;
       _message = '';
     });
 
     try {
-      // 2. Теперь можно играть звук (если он зависнет, блок finally спасет)
       await SoundsService.playClick();
 
       final result1 = await _spinReel(
@@ -143,13 +141,11 @@ class _SlotMachineState
         _slot3 = result3;
       });
     } catch (e) {
-      // Если что-то пошло не так (например, звук или картинка)
       print('Ошибка: $e');
       setState(() {
         _message = 'Ошибка. Попробуйте еще раз.';
       });
     } finally {
-      // 3. ГАРАНТИРОВАННО разблокируем кнопку в конце, при любом исходе
       setState(() {
         _isSpinning = false;
       });
