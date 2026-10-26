@@ -4,8 +4,14 @@
 
 #### Скриншоты готового приложения
 
-|Главный экран|Победа|Проигрыш|
-|![alt text](steps/main.png)|![alt text](steps/win.png)|![alt text](steps/win.png)|
+Главный экран
+![alt text](steps/main.png)!
+
+Победа
+[alt text](steps/win.png)|!
+
+Проигрыш
+[alt text](steps/win.png)|
 
 ### Установка
 Скачайте готовый APK файл:
